@@ -5,10 +5,10 @@ const files = shell.find('dist/**/*.d.ts')
 
 for (const file of files) {
 
-  if (file.endsWith('index.ts')) {
+  if (file.endsWith('index.d.ts')) {
     // Rename index.d.ts without edit the content
-    const dtsFile = file.replace('.ts', '.d.ts');
-    fs.renameSync(file, dtsFile);
+    const dtsFile = file.replace('.d.ts', '.d.cts');
+    fs.copyFileSync(file, dtsFile)
     console.log(`Renamed ${file} to ${dtsFile}`);
     continue; // Next
   }
