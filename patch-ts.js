@@ -4,8 +4,17 @@ const fs = require('fs')
 const files = shell.find('dist/**/*.d.ts')
 
 for (const file of files) {
-  const cts = file.replace('.d.ts', '.d.cts')
 
+  if (file.endsWith('index.ts')) {
+    // Rename index.d.ts without edit the content
+    const dtsFile = file.replace('.ts', '.d.ts');
+    fs.renameSync(file, dtsFile);
+    console.log(`Renamed ${file} to ${dtsFile}`);
+    continue; // Next
+  }
+
+  const cts = file.replace('.d.ts', '.d.cts')
+  
   // Add type qualifiers in annotations
   shell.sed('-i', /(import|export [*{])\s+(?!type\b)/, '$1 type ', file)
   // Remove .js extensions
