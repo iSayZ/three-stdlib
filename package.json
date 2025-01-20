@@ -1,7 +1,6 @@
 {
   "name": "three-stdlib",
   "version": "0.0.0-semantic-released",
-  "private": true,
   "description": "stand-alone library of threejs examples",
   "keywords": [
     "three",
@@ -59,5 +58,6 @@
   "scripts": {
     "build": "rimraf dist && vite build && tsc --emitDeclarationOnly && copyfiles -u 1 \"src/**/*.d.ts\" dist && copyfiles package.json README.md LICENSE dist && json -I -f dist/package.json -e \"this.private=undefined;this.type=\\\"module\\\";\" && node patch-ts.js",
     "lint": "tsc --noEmit"
-  }
+  },
+  "type": "module"
 }
